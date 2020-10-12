@@ -20,14 +20,8 @@ for gpu in gpus:
 
 if __name__ == "__main__":
 
-    # LOADING AND PREPARING THE DATA
-
-    # Define file paths to english and german corpus, pretrained sentencepiece tokenizer
-    file_src = "de-en/europarl-v7.de-en.en"
-    file_trg = "de-en/europarl-v7.de-en.de"
-
     # Prepare Inputs for model
-    train_data, val_data = prepare_languages(file_src, file_trg, K.NUMBER_SENTENCES, K.SEQUENCE_LENGTH,
+    train_data, val_data = prepare_languages(K.FILE_SRC, K.FILE_TRG, K.NUMBER_SENTENCES, K.SEQUENCE_LENGTH,
                                                         K.VOCAB_SIZE_SRC, K.VOCAB_SIZE_TRG, K.TOKENIZER_SRC_PATH,
                                                         K.TOKENIZER_TRG_PATH, K.DO_LOWER_CASE, K.BATCH_SIZE,
                                                         K.TRAIN_SIZE, K.VAL_SIZE)

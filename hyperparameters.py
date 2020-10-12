@@ -5,6 +5,8 @@ class K:
     This class and its parameters are used across all other files for this model.
     '''
     # data parameters
+    FILE_SRC = "corpus/europarl-v7.de-en.en"
+    FILE_TRG = "corpus/europarl-v7.de-en.de"
     NUMBER_SENTENCES = 1000000
     SEQUENCE_LENGTH = 70
     DO_LOWER_CASE = True

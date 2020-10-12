@@ -37,7 +37,7 @@ test.py (used for inference/translation)
 train_evaluate_main.py (loading data, training the model)
 
 Folders:
-de-en (download and extract it from Europarl dataset)
+corpus (download of files below required)
 |----europarl-v7.de-en.de
 |----europarl-v7.de-en.en
 sentencepiece (pretrained tokenizer on both languages, will be created during training)
@@ -51,17 +51,21 @@ saved_models (will hold trained model weights, will be created during training)
 
 
 ## Usage
+
 ### Training the model
+First clone the model `git clone https://github.com/xflashxx/seq2seq_nmt_att.git`, then change your current directory to the project directory `cd seq2seq_nmt_att`.
+
 Prerequisites:
 
-* English-German EuroParl dataset.
+* English-German Europarl dataset.
 
-Download the English-German EuroParl Corpus from here: [EuroParl-Dataset](https://www.statmt.org/europarl/v7/de-en.tgz), extract it and move the folder `de-en` to the project folder.
+Download the English-German Europarl Corpus from here: [Europarl-Dataset](https://www.statmt.org/europarl/v7/de-en.tgz), extract it and move the folder `corpus` to the project folder.
 
-To train the model on the English-German EuroParl Corpus, simply run:
+Alternatively, you can use another parallel Europarl Corpus as well (for example the English and Spanish parallel Corpus, EN-ES). Simply adjust the filepaths in the file `hyperparameters.py`. 
+
+To train the model on the English-German Europarl Corpus, simply run:
 
 ```bash
-cd path/to/seq2seq_nmt/
 python3 train_evaluate_main.py
 ```
 Alternatively, you can open the file `train_evaluate_main.py` in an IDE of your choice and run it there.
@@ -71,11 +75,10 @@ Alternatively, you can open the file `train_evaluate_main.py` in an IDE of your 
 
 
 ### Translating with a pretrained model
-In order to translate an Source sentence to the Target Language, we need a pretrained model.
+In order to translate a sentence from the source into the target language, we need a pretrained model.
 To make translations using your pretrained model, run it from the command line:
 
 ```bash
-cd path/to/seq2seq_nmt/
 python3 test.py
 ```
 You will then be able to enter a sentence in your source language, and the model will translate it into the target language.
@@ -87,6 +90,8 @@ The most important parameters can be set in the class `K` in `hyperparameters.py
 
 **Data Parameters**:
 
+* `FILE_SRC (default: "corpus/europarl-v7.de-en.en"`): file path to the source parallel corpus.
+* `FILE_TRG (default: "corpus/europarl-v7.de-en.de"`): file path to the target parallel corpus.
 * `NUMBER_SENTENCES (default: 1,000,000)`: The maximum number of sentences that should be read from the Europarl Corpus. If all sentences should be read, set it to `None`. Important: this parameter must be that high such that the validation and test datasets have at least `BATCH_SIZE` observations.
 * `SEQUENCE_LENGTH (default: 70)`: The number of tokens one sequence/sentence will hold. Applies for both languages.
 * `DO_LOWER_CASE (default: True)`: Whether to convert all text to lower-case. If changed, you must also retrain the SentencePiece tokenizer for the target language (simply delete the SentencePiece folder).
@@ -117,7 +122,7 @@ The most important parameters can be set in the class `K` in `hyperparameters.py
 
 **Can I use another dataset, not just EuroParl?**
 
-Yes, as long as the sentences in both languages are in different files. There are some datasets where in each line, there are two sentences in both languages, seperated by `\t` (Tab), but you will have to modify the code such that it takes that into account.
+Yes, as long as the sentences in both languages are in different files and are alligned (meaning: the n-th sentence in document A corresponds to the translated n-th sentence in document B). There are parallel corpora where a sentence from both languages are in one file, separated by a tab `\t`, but you will have to modify the code such that it takes that into account or convert your tabbed corpus.
 
 ## Model Details
 This Neural Machine Translation model is a Sequence-to-Sequence (Seq2Seq) model, consisting of an Encoder and a Decoder implementing LSTMs. The Encoder processes the Input (a sentence, i.e. a fixed-length sequence of token ids) and returns its hidden and cell states.

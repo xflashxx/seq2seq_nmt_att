@@ -24,10 +24,6 @@ if not os.path.isfile(checkpoint_file):
 
 if __name__ == "__main__":
 
-    # Define file paths to source and target corpus, pretrained sentencepiece tokenizer
-    file_src = "de-en/europarl-v7.de-en.en"
-    file_trg = "de-en/europarl-v7.de-en.de"
-
     # Load pretrained model
     translation_model, encoder, decoder = get_models(for_training=False)
     translation_model.load_weights(checkpoint_file)
@@ -54,8 +50,8 @@ if __name__ == "__main__":
             total_sentences = None
 
         # load raw language files as strings
-        source_sentences = load_doc(file_src, total_sentences, do_lower_case = True)[-K.NUMBER_TEST_SENTENCES:]
-        target_ref_sentences = load_doc(file_trg, total_sentences, do_lower_case = True)[-K.NUMBER_TEST_SENTENCES:]
+        source_sentences = load_doc(K.FILE_SRC, total_sentences, do_lower_case = True)[-K.NUMBER_TEST_SENTENCES:]
+        target_ref_sentences = load_doc(K.FILE_TRG, total_sentences, do_lower_case = True)[-K.NUMBER_TEST_SENTENCES:]
 
         # Remove strings with empty sentences
         source_sentences, target_ref_sentences = remove_multiple_sentences(source_sentences, target_ref_sentences)
