@@ -17,8 +17,8 @@ def greedy_translation(sentence: str, sequence_length: int, tokenizer_src_path: 
         encoder: Keras Model, Encoder from the Translation model.
         decoder: Keras Model, Decoder from the Translation model.
     Returns:
-        output_sentence: translation created by the Seq2Seq model.
-
+        output_sentence: decoded token id sequence (into words) created by the decoder OR
+        output_sequence: token id sequence created by the decoder.
     '''
     # Prepare input sentence
     sentence = fix_punctuation(sentence.lower())
