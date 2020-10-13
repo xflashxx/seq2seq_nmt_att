@@ -130,14 +130,14 @@ The decoder takes the hidden sequences from the encoder, processes it, and outpu
 
 Overview of the entire NMT model:
 
-![model](graphics/nmt.pdf?raw=true "The whole Model")
+![entire_model](images/entire_model.png "The whole Model")
 
 ### Encoder
 The Encoder requires as input:
 
 * Token IDs: token ids of a tokenized sentence in the source language.
 
-![encoder](graphics/encoder.pdf?raw=true "The Encoder")
+![encoder](images/encoder.png "The Encoder")
 
 First, word embeddings are computed, then these are processed by two stacked forward LSTM-layers, each outputting its last hidden and cell state. The last LSTM-layer additionally outputs all hidden states for every token in the sequence.
 Thus, the encoder produces three outputs:
@@ -155,7 +155,7 @@ During training, we use teacher forcing. Thus we require an additional input for
 * the last hidden states from the encoder (*enc_h1* and *enc_h2*)
 * the last cell states from the encoder (*enc_c1* and *enc_c2*)
 
-![decoder](graphics/decoder.pdf?raw=true "The Decoder")
+![decoder](images/decoder.png "The Decoder")
 
 The Embedding layer takes as input the Token IDs (2x, again for teacher forcing) and outputs a word embedding for each token. Then the word embeddings are fed to two LSTM-layers, with initial states for LSTM Layer 1 initialized from the Encoders LSTM 1 Layer (*enc_h1* and *enc_c2*) and LSTM Layer 2 initialized from the Encoders LSTM 2 Layer (*enc_h2* and *enc_c2*).
 The output of the last LSTM-layer (*Decoder_Output*) and all hidden states from the encoder are processed by an Attention Layer layer (Luong) and outputs a so called *Context vector*.
