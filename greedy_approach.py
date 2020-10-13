@@ -40,7 +40,7 @@ def greedy_translation(sentence: str, sequence_length: int, tokenizer_src_path: 
     dec_input[0, 0] = bos_id
     # set hidden states from both LSTM layers from decoder to final hidden states from LSTM layers from encoder
     dec_hidden1, dec_hidden2 = enc_hidden1, enc_hidden2
-    # create output sequence list, will hold predicted tokens
+    # create output sequence list, will hold predicted token ids
     output_sequence = [bos_id]
 
     while True:
@@ -48,7 +48,7 @@ def greedy_translation(sentence: str, sequence_length: int, tokenizer_src_path: 
         # get id with max. probability from the predicted decoder output
         pred_token_id = int(tf.argmax(logits, -1).numpy()[0][0])
         dec_input[0, 0] = pred_token_id
-        # convert this id to a word and append it to the list of translated words
+        # add predicted token id to the list of all predicted token ids so far
         output_sequence.append(pred_token_id)
         # check if sequence exceeds max. seq. length or if EOS-tag was predicted, then break
         if len(output_sequence) >= sequence_length or pred_token_id == eos_id:
