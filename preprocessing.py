@@ -171,7 +171,7 @@ def tokenize_sentences(sentences: list, tokenizer_path: str, sequence_length: in
             print("No pretrained tokenizer found. Begin training...")
             train_sentencepiece_tokenizer(sentences, vocab_size, foldername, filename)
         else:
-            print("Please train a model first. Exiting.")
+            print("No SentencePiece tokenizer found. Please train a model first, which trains the tokenizer automatically. Exiting.")
             sys.exit()
 
     # load pretrained tokenizer
