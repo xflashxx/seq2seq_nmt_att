@@ -34,7 +34,7 @@ hyperparameters.py (Definition of Hyperparameters)
 model.py (Definition of the NMT model)
 preprocessing.py (functions for preprocessing a dataset)
 test.py (used for inference/translation)
-train_evaluate_main.py (loading data, training the model)
+train.py (loading data, training the model)
 
 Folders:
 corpus (download of files below required)
@@ -61,14 +61,14 @@ Prerequisites:
 
 Download the English-German Europarl Corpus from here: [Europarl-Dataset](https://www.statmt.org/europarl/v7/de-en.tgz), extract it and move the folder `corpus` to the project folder.
 
-Alternatively, you can use another parallel Europarl Corpus as well (for example the English and Spanish parallel Corpus, EN-ES). Simply adjust the filepaths in the file `hyperparameters.py`. 
+Alternatively, you can use another parallel Europarl Corpus as well (for example the English and Spanish parallel Corpus, EN-ES). Simply adjust the filepaths in the file `hyperparameters.py`.
 
 To train the model on the English-German Europarl Corpus, simply run:
 
 ```bash
-python3 train_evaluate_main.py
+python3 train.py
 ```
-Alternatively, you can open the file `train_evaluate_main.py` in an IDE of your choice and run it there.
+Alternatively, you can open the file `train.py` in an IDE of your choice and run it there.
 
 
 
